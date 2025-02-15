@@ -1,0 +1,6 @@
+[submodule "r3nGUI"]
+	path = r3nGUI
+	url = https://github.com/r3nsen/r3nGUI.git
+[submodule "ShaderManager"]
+	path = ShaderManager
+	url = https://github.com/r3nsen/ShaderManager.git

@@ -2,12 +2,19 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using r3nGraphics;
+
+using r3nGUI;
+
+using System.IO;
+
 namespace rsnes
 {
     public class Game1 : Game
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        Texture2D tex;
 
         public Game1()
         {
@@ -25,9 +32,10 @@ namespace rsnes
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            string fontpath = "C:\\Users\\renat\\OneDrive\\Documentos\\programas\\msdf-atlas-gen-1.2.2-win64\\msdf-atlas-gen\\test.png";
+            tex = Content.Load<Texture2D>("724911");
+            InterfaceElement.Load(Content, GraphicsDevice, Texture2D.FromStream(GraphicsDevice, File.Open(fontpath, FileMode.Open)), _graphics, Window);
+            InterfaceElement.LoadEffects(tex);
         }
 
         protected override void Update(GameTime gameTime)
@@ -42,9 +50,12 @@ namespace rsnes
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(new Color(.05f, .05f, .05f));
+            //_gm.Begin(0, 0, Dimension.W, Dimension.H);
+            InterfaceElement.Example();
+            GraphicsManager.FlushUI(InterfaceElement.drawStack.Span, _gd: GraphicsDevice);
+            InterfaceElement.drawStack = InterfaceElement.drawStack.Slice(0, 0);
 
             base.Draw(gameTime);
         }
