@@ -21,6 +21,7 @@ namespace rsnes
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            _graphics.GraphicsProfile = GraphicsProfile.HiDef;
         }
 
         protected override void Initialize()
@@ -53,7 +54,20 @@ namespace rsnes
 
             GraphicsDevice.Clear(new Color(.05f, .05f, .05f));
             //_gm.Begin(0, 0, Dimension.W, Dimension.H);
-            InterfaceElement.Example();
+            //InterfaceElement.Example();
+            InterfaceElement.Begin(0, 0, Dimension.W, Dimension.H);
+
+            InterfaceElement.BeginLayout(dir: LayoutDir.Horizontal);
+            InterfaceElement.BeginLayout(dir: LayoutDir.Horizontal, "MarginLayout");//StyleID.Camp);
+            InterfaceElement.EndLayout();
+            InterfaceElement.BeginLayout(dir: LayoutDir.Horizontal, "LayoutNoRes");// StyleID.noresLay);
+            InterfaceElement.Button();
+            InterfaceElement.Button();
+            InterfaceElement.Button();
+            InterfaceElement.EndLayout();
+            InterfaceElement.EndLayout();
+
+            InterfaceElement.End();
             GraphicsManager.FlushUI(InterfaceElement.drawStack.Span, _gd: GraphicsDevice);
             InterfaceElement.drawStack = InterfaceElement.drawStack.Slice(0, 0);
 
