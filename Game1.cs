@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 using r3nGraphics;
 
 using r3nGUI;
-
+using r3nGraphics;
 using System.IO;
 
 namespace rsnes
